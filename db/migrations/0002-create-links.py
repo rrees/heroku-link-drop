@@ -1,23 +1,23 @@
 """
-Create the links table
+Create a links table
 """
 
 from yoyo import step
 
-__depends__ = []
+__depends__ = ['0001-create-a-collections-table']
 
 create_collection_table = """
-CREATE TABLE collections (
-    key BIGSERIAL PRIMARY KEY,
+CREATE TABLE links (
+    id BIGSERIAL PRIMARY KEY,
+    collection_id BIGSERIAL REFERENCES collections(key),
     name TEXT NOT NULL,
     description TEXT,
-    public BOOLEAN NOT NULL,
-    public_id UUID NOT NULL,
+    url TEXT,
     created_timestamp timestamp NOT NULL DEFAULT current_timestamp,
     updated_timestamp timestamp NOT NULL DEFAULT current_timestamp
 )
 """
 
 steps = [
-    step(create_collection_table, "DROP TABLE collections"),
+    step(create_collection_table, "DROP TABLE links"),
 ]

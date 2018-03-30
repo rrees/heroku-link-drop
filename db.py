@@ -23,3 +23,9 @@ cur.execute('SELECT * FROM collections')
 results = cur.fetchall()
 
 print(results)
+
+cur.execute('SELECT * FROM links')
+
+results = cur.fetchall()
+
+print(results)
