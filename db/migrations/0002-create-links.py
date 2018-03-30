@@ -6,11 +6,11 @@ from yoyo import step
 
 __depends__ = ['0001-create-a-collections-table']
 
-create_collection_table = """
+create_links_table = """
 CREATE TABLE links (
     id BIGSERIAL PRIMARY KEY,
     collection_id BIGSERIAL REFERENCES collections(key),
-    name TEXT NOT NULL,
+    name TEXT,
     description TEXT,
     url TEXT,
     created_timestamp timestamp NOT NULL DEFAULT current_timestamp,
@@ -19,5 +19,5 @@ CREATE TABLE links (
 """
 
 steps = [
-    step(create_collection_table, "DROP TABLE links"),
+    step(create_links_table, "DROP TABLE links"),
 ]
