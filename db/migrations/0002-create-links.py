@@ -12,7 +12,7 @@ CREATE TABLE links (
     collection_id BIGSERIAL REFERENCES collections(key),
     name TEXT,
     description TEXT,
-    url TEXT,
+    url TEXT NOT NULL,
     created_timestamp timestamp NOT NULL DEFAULT current_timestamp,
     updated_timestamp timestamp NOT NULL DEFAULT current_timestamp
 )
