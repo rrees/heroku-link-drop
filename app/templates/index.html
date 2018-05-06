@@ -1,7 +1,12 @@
 {% extends 'default.html' %}
 
+{% block navbar %}{% endblock %}
+
 {% block content %}
 <div class="container-fluid">
-    <p><em>Hello</em> <strong>world</strong></p>
+    <h1>Login</h1>
+    <form method="POST" action="/auth/forms/login">
+        {% include 'forms/login.html' %}
+    </form>
 </div>
 {% endblock %}

@@ -1,5 +1,6 @@
 import os
 import logging
+import itertools
 
 import flask
 
@@ -7,6 +8,7 @@ from flask_sslify import SSLify
 
 from . import handlers
 from . import redis_utils
+from .auth.routes import auth_routes
 
 ENV = os.environ.get("ENV", "PROD")
 
@@ -24,9 +26,15 @@ logger = app.logger
 
 routes = [
 	('/', 'index', handlers.pages.front_page, ['GET']),
+    ('/home', 'home', handlers.pages.home_page, ['GET']),
 ]
 
-for path, endpoint, handler, methods in routes:
+all_routes = itertools.chain(
+    routes,
+    auth_routes,
+)
+
+for path, endpoint, handler, methods in all_routes:
 	app.add_url_rule(path, endpoint, handler, methods=methods)
 
 @app.errorhandler(500)
