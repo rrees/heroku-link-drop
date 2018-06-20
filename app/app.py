@@ -27,6 +27,7 @@ logger = app.logger
 routes = [
 	('/', 'index', handlers.pages.front_page, ['GET']),
     ('/home', 'home', handlers.pages.home_page, ['GET']),
+    ('/forms/collections/new', 'new_collection_form', handlers.forms.new_collection, ['POST']),
 ]
 
 all_routes = itertools.chain(
