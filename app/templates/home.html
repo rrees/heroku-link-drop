@@ -1,10 +1,12 @@
 {% extends 'default.html' %}
 
+{% block title %}Home{% endblock %}
+
 {% block content %}
 <div class="container-fluid">
     <h1>Your links</h1>
 
-    <form>
+    <form method="POST" action="/forms/collection/new">
         {% include 'forms/new-collection.html' %}
     </form>
 </div>

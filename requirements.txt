@@ -4,3 +4,5 @@ Flask-SSLify
 redis
 pg8000
 wtforms
+pypika
+dsnparse
