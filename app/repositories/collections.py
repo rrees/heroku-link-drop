@@ -1,4 +1,5 @@
 import os
+import uuid
 
 import dsnparse
 import pg8000
@@ -27,5 +28,21 @@ def all():
     conn.close()
     return results
 
-def create_collection(name):
-    pass
+def create(name, description=None, public=False):
+
+    public_id = str(uuid.uuid4())
+    insert_statement = Query.into(collections_table)\
+        .columns('name', 'description', 'public', 'public_id')\
+        .insert(name, description, public, public_id)
+    
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute(str(insert_statement) + 'RETURNING key')
+    collection_id = cursor.fetchone()
+
+    cursor.close()
+
+    conn.commit()
+    conn.close()
+
+    return collection_id
