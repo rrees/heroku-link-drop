@@ -16,7 +16,7 @@
     <table>
     {% for collection in collections %}
         <tr>
-            <td>{{collection[1]}}</td>
+            <td><a href="/collection/{{collection.key}}">{{collection.name}}</a></td>
         </tr>
     {% endfor %}
     </table>

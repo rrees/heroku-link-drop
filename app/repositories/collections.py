@@ -5,10 +5,19 @@ import dsnparse
 import pg8000
 from pypika import Table, Query
 
+from . import models
+
 DATABASE_URI = os.environ['DATABASE_URI']
 
 collections_table = Table('collections')
 r = dsnparse.parse(DATABASE_URI)
+
+def map_to_collection(result):
+    return models.Collection(
+        key = result[0],
+        name = result[1],
+        public = result[2]
+    )
 
 def connect():
     return pg8000.connect(r.username,
@@ -18,12 +27,12 @@ def connect():
         ssl=True)
 
 def all():
-    q = Query.from_(collections_table).select("*")
+    q = Query.from_(collections_table).select('key', 'name', 'public')
 
     conn = connect()
     cursor = conn.cursor()
     cursor.execute(str(q))
-    results = [r for r in cursor.fetchall()]
+    results = [map_to_collection(r) for r in cursor.fetchall()]
     cursor.close()
     conn.close()
     return results
