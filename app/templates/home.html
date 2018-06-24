@@ -10,4 +10,16 @@
         {% include 'forms/new-collection.html' %}
     </form>
 </div>
+
+<div class="container-fluid">
+    {% if collections %}
+    <table>
+    {% for collection in collections %}
+        <tr>
+            <td>{{collection[1]}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+</div>
 {% endblock %}
