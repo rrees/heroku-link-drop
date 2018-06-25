@@ -55,3 +55,16 @@ def create(name, description=None, public=False):
     conn.close()
 
     return collection_id
+
+def read(key):
+    q = Query.from_(collections_table)\
+        .select('key', 'name', 'public')\
+        .where(collections_table.key == key)
+
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute(str(q))
+    result = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return map_to_collection(result)
