@@ -8,6 +8,6 @@ class NewCollection(Form):
 
 class NewLink(Form):
     collection_id = fields.HiddenField('Collection ID', [validators.required()])
-    url = fields.StringField('URL', [validators.required()]),
+    url = fields.StringField('URL', [validators.required()])
     name = fields.StringField('Name')
     description = fields.StringField('Description')
