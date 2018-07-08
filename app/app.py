@@ -1,6 +1,7 @@
 import os
 import logging
 import itertools
+import sys
 
 import flask
 
@@ -11,6 +12,12 @@ from . import redis_utils
 from .auth.routes import auth_routes
 
 ENV = os.environ.get("ENV", "PROD")
+
+logging.basicConfig(
+    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+    level=logging.DEBUG,
+    stream=sys.stderr,
+)
 
 redis_url = os.environ.get("REDIS_URL", None)
 

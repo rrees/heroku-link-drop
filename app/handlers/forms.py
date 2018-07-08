@@ -2,7 +2,9 @@ from flask import redirect, request, url_for
 
 from app import forms
 from app.repositories import collections
+from app.decorators import login_required
 
+@login_required
 def new_collection():
     collection_form = forms.NewCollection(request.form)
 
