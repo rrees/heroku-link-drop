@@ -36,6 +36,7 @@ routes = [
     ('/home', 'home', handlers.pages.home_page, ['GET']),
     ('/collection/<collection_id>', 'collection', handlers.pages.collection, ['GET']),
     ('/forms/collections/new', 'new_collection_form', handlers.forms.new_collection, ['POST']),
+    ('/forms/link/add', 'new_link_form', handlers.forms.add_link, ['POST']),
 ]
 
 all_routes = itertools.chain(

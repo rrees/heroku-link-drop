@@ -8,8 +8,8 @@
 <div class="container-fluid">
     <h1>{{collection.name}}</h1>
 
-    <form method="POST" action="/forms/add-link">
-        <input type="hidden" name="collection_key" value="{{collection.key}}">
+    <form method="POST" action="{{url_for('new_link_form')}}">
+        <input type="hidden" name="collection_id" value="{{collection.key}}">
         <div class="form-group">
             <label for="url">URL</label>
             <input id="url" name="url" type="text" class="form-control" required>

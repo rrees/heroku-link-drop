@@ -7,7 +7,7 @@ class NewCollection(Form):
     public = fields.BooleanField('Public', default=False)
 
 class NewLink(Form):
-    collection_id = fields.IntegerField('Collection ID', [validators.required()])
+    collection_id = fields.HiddenField('Collection ID', [validators.required()])
     url = fields.StringField('URL', [validators.required()]),
     name = fields.StringField('Name')
     description = fields.StringField('Description')

@@ -12,7 +12,6 @@ ADMIN_PASSWORD = os.environ['PASSWORD']
 
 def login_form():
     login_form = forms.Login(flask.request.form)
-    _log.info(ADMIN_EMAILS)
     if login_form.validate() \
         and login_form.password.data == ADMIN_PASSWORD \
         and login_form.email.data in ADMIN_EMAILS:
