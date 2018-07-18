@@ -10,14 +10,7 @@
 
     <form method="POST" action="{{url_for('new_link_form')}}">
         <input type="hidden" name="collection_id" value="{{collection.key}}">
-        <div class="form-group">
-            <label for="url">URL</label>
-            <input id="url" name="url" type="text" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" class="form-control">
-        </div>
+        {% include 'forms/link.html' %}
         <div class="form-group">
         <button type="submit" class="btn btn-primary">Add link</button>
         </div>
@@ -27,7 +20,12 @@
     <h2>Links</h2>
     <ul>
         {% for link in links %}
-        <li><a href="{{link.url}}" target="{{link.url}}" rel="noopener">{% if link.name %}{{link.name}}{% else %}{{link.url}}{% endif %}</a></li>
+        <li>
+            <p><a href="{{link.url}}" target="{{link.url}}" rel="noopener">{% if link.name %}{{link.name}}{% else %}{{link.url}}{% endif %}</a></p>
+            {% if link.description %}
+            <div>{{link.description}}</div>
+            {% endif %}
+        </li>
         {% endfor %}
     </ul>
     {% else %}

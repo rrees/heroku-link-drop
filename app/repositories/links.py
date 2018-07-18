@@ -8,12 +8,13 @@ from .connection import connect
 
 links_table = Table('links')
 
-Link = namedtuple('Link', ['url', 'name'])
+Link = namedtuple('Link', ['url', 'name', 'description'])
 
 def map_to_link(row):
 	return Link(
 		url=row[0],
-		name=row[1])
+		name=row[1],
+		description=row[2])
 
 def add_link(collection_id, url, name=None, description=None):
 
@@ -34,7 +35,10 @@ def add_link(collection_id, url, name=None, description=None):
 	return link_id
 
 def for_collection(collection_id):
-	q = Query.from_(links_table).select('url', 'name')
+	q = Query.from_(links_table)\
+		.select('url', 'name', 'description')\
+		.where(links_table.collection_id == collection_id)\
+		.orderby('updated_timestamp')
 
 	conn = connect()
 	cursor = conn.cursor()
