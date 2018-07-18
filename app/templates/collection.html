@@ -24,9 +24,10 @@
     </form>
 
     {% if links %}
+    <h2>Links</h2>
     <ul>
         {% for link in links %}
-        <li>{{link.url}}</li>
+        <li><a href="{{link.url}}" target="{{link.url}}" rel="noopener">{% if link.name %}{{link.name}}{% else %}{{link.url}}{% endif %}</a></li>
         {% endfor %}
     </ul>
     {% else %}

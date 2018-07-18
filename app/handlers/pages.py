@@ -1,6 +1,6 @@
 import flask
 
-from app.repositories import collections
+from app.repositories import collections, links
 
 from app.decorators import login_required
 
@@ -15,4 +15,5 @@ def home_page():
 @login_required
 def collection(collection_id):
 	return flask.render_template('collection.html',
-		collection=collections.read(collection_id))
+		collection=collections.read(collection_id),
+		links=links.for_collection(collection_id))

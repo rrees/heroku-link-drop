@@ -1,3 +1,4 @@
+from collections import namedtuple
 import uuid
 
 import pg8000
@@ -6,6 +7,13 @@ from pypika import Table, Query
 from .connection import connect
 
 links_table = Table('links')
+
+Link = namedtuple('Link', ['url', 'name'])
+
+def map_to_link(row):
+	return Link(
+		url=row[0],
+		name=row[1])
 
 def add_link(collection_id, url, name=None, description=None):
 
@@ -24,3 +32,14 @@ def add_link(collection_id, url, name=None, description=None):
 	conn.close()
 
 	return link_id
+
+def for_collection(collection_id):
+	q = Query.from_(links_table).select('url', 'name')
+
+	conn = connect()
+	cursor = conn.cursor()
+	cursor.execute(str(q))
+	results = [map_to_link(r) for r in cursor.fetchall()]
+	cursor.close()
+	conn.close()
+	return results
