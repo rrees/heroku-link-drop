@@ -4,7 +4,7 @@ import dsnparse
 import pg8000
 
 
-DATABASE_URI = os.environ['DATABASE_URI']
+DATABASE_URI = os.environ['DATABASE_URL']
 
 r = dsnparse.parse(DATABASE_URI)
 
