@@ -1,0 +1,33 @@
+{% extends 'public/base.html' %}
+
+{% block title %}{{collection.name}}{% endblock %}
+
+{% block body %}
+
+<h1 class="collection-name">{{collection.name}}</h1>
+
+{% if not collection.links %}
+<p>This collection does not currently have any links.</p>
+{% endif %}
+
+{% if collection.links %}
+<section class="collection-display">
+
+<ul class="collection-links">
+	{% for link in collection.links %}
+	<li class="collection-link">
+		<p><a class="collection-link__link" href="{{link.url}}">{{link | name_or_url}}</a></p>
+		{% if link.description %}
+		<div>
+		{{link.description}}
+		</div>
+		{% endif %}
+	</li>
+	{% endfor %}
+</ul>
+
+</section>
+
+{% endif %}
+
+{% endblock %}
