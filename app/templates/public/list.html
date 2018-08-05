@@ -6,15 +6,15 @@
 
 <h1 class="collection-name">{{collection.name}}</h1>
 
-{% if not collection.links %}
+{% if not links %}
 <p>This collection does not currently have any links.</p>
 {% endif %}
 
-{% if collection.links %}
+{% if links %}
 <section class="collection-display">
 
 <ul class="collection-links">
-	{% for link in collection.links %}
+	{% for link in links %}
 	<li class="collection-link">
 		<p><a class="collection-link__link" href="{{link.url}}">{{link | name_or_url}}</a></p>
 		{% if link.description %}

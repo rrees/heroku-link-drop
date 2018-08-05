@@ -7,6 +7,7 @@ import flask
 
 from flask_sslify import SSLify
 
+from . import filters
 from . import handlers
 from . import redis_utils
 from .auth.routes import auth_routes
@@ -30,6 +31,8 @@ if not ENV == "DEV":
     sslify = SSLify(app)
 
 logger = app.logger
+
+app.jinja_env.filters['name_or_url'] = filters.name_or_url
 
 routes = [
 	('/', 'index', handlers.pages.front_page, ['GET']),

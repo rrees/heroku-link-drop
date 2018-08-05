@@ -34,11 +34,14 @@ def add_link(collection_id, url, name=None, description=None):
 
 	return link_id
 
-def for_collection(collection_id):
+def for_collection(collection_id, default_orderby=None):
+
+	order_by = default_orderby if default_orderby else 'updated_timestamp'
+
 	q = Query.from_(links_table)\
 		.select('url', 'name', 'description')\
 		.where(links_table.collection_id == collection_id)\
-		.orderby('updated_timestamp')
+		.orderby(order_by)
 
 	conn = connect()
 	cursor = conn.cursor()
