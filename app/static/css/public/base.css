@@ -20,6 +20,10 @@ body {
 	overflow-wrap: break-word;
 }
 
+.collection-link__link {
+	font-size: 120%;
+}
+
 .collection-links {
 	list-style: none;
 	margin: 0;
