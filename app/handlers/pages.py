@@ -17,3 +17,9 @@ def collection(collection_id):
 	return flask.render_template('collection.html',
 		collection=collections.read(collection_id),
 		links=links.for_collection(collection_id))
+
+@login_required
+def all_collections():
+	return flask.render_template('collections.html',
+		collections=collections.all(),
+	)
