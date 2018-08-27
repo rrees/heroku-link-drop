@@ -10,7 +10,7 @@ def front_page():
 @login_required
 def home_page():
 	return flask.render_template('home.html',
-		collections=collections.all(),)
+		collections=collections.all(sort_descending=True),)
 
 @login_required
 def collection(collection_id):
@@ -21,5 +21,5 @@ def collection(collection_id):
 @login_required
 def all_collections():
 	return flask.render_template('collections.html',
-		collections=collections.all(),
+		collections=collections.all(order_column='name'),
 	)

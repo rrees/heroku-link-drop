@@ -1,7 +1,7 @@
 import uuid
 
 import pg8000
-from pypika import Table, Query
+from pypika import Table, Query, Order
 
 from . import models
 from .connection import connect
@@ -15,8 +15,19 @@ def map_to_collection(result):
         public = result[2]
     )
 
-def all():
-    q = Query.from_(collections_table).select('key', 'name', 'public')
+def all(order_column=None, sort_descending=False):
+
+    if not order_column:
+        order_column = 'updated_timestamp'
+
+    sort_order = Order.desc if sort_descending else Order.asc
+
+    
+    q = Query.from_(collections_table)\
+        .select('key', 'name', 'public')\
+        .orderby(order_column, order=sort_order)
+
+    print(str(q))
 
     conn = connect()
     cursor = conn.cursor()
