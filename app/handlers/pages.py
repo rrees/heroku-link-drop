@@ -23,3 +23,9 @@ def all_collections():
 	return flask.render_template('collections.html',
 		collections=collections.all(order_column='name'),
 	)
+
+@login_required
+def link(collection_id, link_id):
+	return flask.render_template('link.html',
+		collection=collections.read(collection_id),
+	)

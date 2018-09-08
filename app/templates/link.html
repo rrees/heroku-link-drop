@@ -1,0 +1,20 @@
+{% extends 'default.html' %}
+
+{% block title %}{{collection.name}}{% endblock %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <h1>{{collection.name}}</h1>
+
+    <form method="POST" action="{{url_for('new_link_form')}}">
+        <input type="hidden" name="collection_id" value="{{collection.key}}">
+        {% include 'forms/link.html' %}
+        <div class="form-group">
+        <button type="submit" class="btn btn-primary">Edit link</button>
+        </div>
+    </form>
+
+</div>
+{% endblock %}

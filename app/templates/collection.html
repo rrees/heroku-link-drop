@@ -25,6 +25,7 @@
             {% if link.description %}
             <div>{{link.description}}</div>
             {% endif %}
+            <div><small><a href="{{url_for('link', collection_id=collection.key, link_id=link.id)}}">Edit</a></small></div>
         </li>
         {% endfor %}
     </ul>

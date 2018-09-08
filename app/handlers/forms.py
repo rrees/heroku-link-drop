@@ -24,3 +24,13 @@ def add_link():
     links.add_link(**link_form.data)
 
     return redirect(url_for('collection', collection_id=link_form.collection_id.data))
+
+
+@login_required
+def edit_link():
+    link_form = forms.NewLink(request.form)
+    assert link_form.validate(), "Link data in the form was incomplete"
+    logging.info(link_form.data)
+    links.add_link(**link_form.data)
+
+    return redirect(url_for('collection', collection_id=link_form.collection_id.data))

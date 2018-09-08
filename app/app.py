@@ -40,8 +40,10 @@ routes = [
     ('/collection/<collection_id>', 'collection', handlers.pages.collection, ['GET']),
     ('/forms/collections/new', 'new_collection_form', handlers.forms.new_collection, ['POST']),
     ('/forms/link/add', 'new_link_form', handlers.forms.add_link, ['POST']),
+    ('/forms/link/edit', 'new_link_form', handlers.forms.add_link, ['POST']),
     ('/public/collection/<collection_id>', 'public_collection', handlers.public.collection, ['GET']),
     ('/collections', 'collections', handlers.pages.all_collections, ['GET']),
+    ('/collection/<collection_id>/link/<link_id>', 'link', handlers.pages.link, ['GET']),
 ]
 
 all_routes = itertools.chain(

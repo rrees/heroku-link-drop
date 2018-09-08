@@ -8,13 +8,19 @@ from .connection import connect
 
 links_table = Table('links')
 
-Link = namedtuple('Link', ['url', 'name', 'description'])
+Link = namedtuple('Link', [
+	'url',
+	'name',
+	'description',
+	'id'])
 
 def map_to_link(row):
 	return Link(
 		url=row[0],
 		name=row[1],
-		description=row[2])
+		description=row[2],
+		id=row[3],
+	)
 
 def add_link(collection_id, url, name=None, description=None):
 
@@ -39,7 +45,7 @@ def for_collection(collection_id, default_orderby=None):
 	order_by = default_orderby if default_orderby else 'updated_timestamp'
 
 	q = Query.from_(links_table)\
-		.select('url', 'name', 'description')\
+		.select('url', 'name', 'description', 'id')\
 		.where(links_table.collection_id == collection_id)\
 		.orderby(order_by)
 
