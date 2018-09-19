@@ -18,9 +18,9 @@
 
     {% if links %}
     <h2>Links</h2>
-    <ul>
+    <ul class="links-list">
         {% for link in links %}
-        <li>
+        <li class="links-list--link-entry">
             <p><a href="{{link.url}}" target="{{link.url}}" rel="noopener">{% if link.name %}{{link.name}}{% else %}{{link.url}}{% endif %}</a></p>
             {% if link.description %}
             <div>{{link.description}}</div>
