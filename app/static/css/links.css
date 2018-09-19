@@ -1,0 +1,19 @@
+
+.links-list {
+	list-style: none;
+	display: flex;
+	margin: 0;
+	padding: 0;
+	justify-content: space-evenly;
+	align-content: space-evenly;
+	flex-wrap: wrap;
+}
+
+.links-list--link-entry {
+	min-width: 10rem;
+	max-width: 20rem;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	border: solid 1px #ccc;
+}
+
