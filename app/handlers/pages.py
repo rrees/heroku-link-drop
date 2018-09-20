@@ -28,4 +28,5 @@ def all_collections():
 def link(collection_id, link_id):
 	return flask.render_template('link.html',
 		collection=collections.read(collection_id),
+		link=links.read(link_id),
 	)

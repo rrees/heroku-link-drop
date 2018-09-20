@@ -1,13 +1,16 @@
 <div class="form-group">
     <label for="url">URL</label>
-    <input id="url" name="url" type="text" class="form-control" required>
+    <input id="url" name="url" type="text" class="form-control" required
+    	{% if link and link.url %}value="{{link.url}}"{% endif %}>
 </div>
 <div class="form-group">
     <label for="name">Name</label>
-    <input id="name" name="name" type="text" class="form-control">
+    <input id="name" name="name" type="text" class="form-control"
+    	{% if link and link.name %}value="{{link.name}}"{% endif %}>
 </div>
 
 <div class="form-group">
     <label for="description">Description</label>
-    <input id="description" name="description" type="text" class="form-control">
+    <input id="description" name="description" type="text" class="form-control"
+    	{% if link and link.description %}value="{{link.description}}"{% endif %}>
 </div>

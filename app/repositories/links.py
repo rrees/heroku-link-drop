@@ -12,7 +12,8 @@ Link = namedtuple('Link', [
 	'url',
 	'name',
 	'description',
-	'id'])
+	'id',
+	'collection_id'])
 
 def map_to_link(row):
 	return Link(
@@ -20,7 +21,12 @@ def map_to_link(row):
 		name=row[1],
 		description=row[2],
 		id=row[3],
+		collection_id=row[4]
 	)
+
+def read_link_columns():
+	return Query.from_(links_table)\
+		.select('url', 'name', 'description', 'id', 'collection_id')
 
 def add_link(collection_id, url, name=None, description=None):
 
@@ -44,8 +50,7 @@ def for_collection(collection_id, default_orderby=None):
 
 	order_by = default_orderby if default_orderby else 'updated_timestamp'
 
-	q = Query.from_(links_table)\
-		.select('url', 'name', 'description', 'id')\
+	q = read_link_columns()\
 		.where(links_table.collection_id == collection_id)\
 		.orderby(order_by)
 
@@ -56,3 +61,37 @@ def for_collection(collection_id, default_orderby=None):
 	cursor.close()
 	conn.close()
 	return results
+
+def read(link_id):
+	q = read_link_columns().where(links_table.id == link_id)
+
+	conn = connect()
+	cursor = conn.cursor()
+	cursor.execute(str(q))
+	link_data = cursor.fetchone()
+	cursor.close()
+	conn.close()
+
+	if link_data:
+		return map_to_link(link_data)
+
+	return None
+
+def update_link(link_id, url, name=None, description=None):
+
+	q = Query.update(links_table)\
+		.set('url', url)\
+		.set('name', name)\
+		.set('description', description)\
+		.where(links_table.id == link_id)
+
+	conn = connect()
+	cursor = conn.cursor()
+	cursor.execute(str(q))
+
+	cursor.close()
+
+	conn.commit()
+	conn.close()
+
+	return read(link_id)

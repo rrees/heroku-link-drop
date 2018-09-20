@@ -6,7 +6,7 @@ from pypika import Table, Query, Order
 from . import models
 from .connection import connect
 
-collections_table = Table('collections')
+collections_table = Table('collections')    
 
 def map_to_collection(result):
     return models.Collection(

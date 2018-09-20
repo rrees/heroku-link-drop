@@ -11,3 +11,8 @@ class NewLink(Form):
     url = fields.StringField('URL', [validators.required()])
     name = fields.StringField('Name')
     description = fields.StringField('Description')
+
+class EditLink(Form):
+    url = fields.StringField('URL', [validators.required()])
+    name = fields.StringField('Name')
+    description = fields.StringField('Description')

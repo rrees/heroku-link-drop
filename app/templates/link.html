@@ -8,8 +8,7 @@
 <div class="container-fluid">
     <h1>{{collection.name}}</h1>
 
-    <form method="POST" action="{{url_for('new_link_form')}}">
-        <input type="hidden" name="collection_id" value="{{collection.key}}">
+    <form method="POST" action="{{url_for('edit_link_form', link_id=link.id)}}">
         {% include 'forms/link.html' %}
         <div class="form-group">
         <button type="submit" class="btn btn-primary">Edit link</button>
