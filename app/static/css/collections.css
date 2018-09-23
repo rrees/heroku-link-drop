@@ -1,0 +1,9 @@
+
+.collection-controls {
+	display: flex;
+	justify-content: space-between;
+}
+
+.collection-controls--control {
+	min-width: 30rem;
+}

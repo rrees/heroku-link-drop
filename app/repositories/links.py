@@ -95,3 +95,4 @@ def update_link(link_id, url, name=None, description=None):
 	conn.close()
 
 	return read(link_id)
+

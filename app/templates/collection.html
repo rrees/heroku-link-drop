@@ -8,13 +8,22 @@
 <div class="container-fluid">
     <h1>{{collection.name}}</h1>
 
-    <form method="POST" action="{{url_for('new_link_form')}}">
-        <input type="hidden" name="collection_id" value="{{collection.key}}">
-        {% include 'forms/link.html' %}
-        <div class="form-group">
-        <button type="submit" class="btn btn-primary">Add link</button>
-        </div>
-    </form>
+    <div class="collection-controls">
+        <form method="POST" action="{{url_for('new_link_form')}}" class="collection-controls--control">
+            <input type="hidden" name="collection_id" value="{{collection.key}}">
+            {% include 'forms/link.html' %}
+            <div class="form-group">
+            <button type="submit" class="btn btn-primary">Add link</button>
+            </div>
+        </form>
+
+        <form method="POST" class="collection-controls--control">
+            <input type="hidden" name="collection_id" value="{{collection.key}}">
+            <div class="form-group">
+            <button type="submit" class="btn btn-primary">{{public_toggle_label}}</button>
+            </div>
+        </form>
+    </div>
 
     {% if links %}
     <h2>Links</h2>

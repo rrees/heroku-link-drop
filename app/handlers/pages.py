@@ -14,9 +14,13 @@ def home_page():
 
 @login_required
 def collection(collection_id):
+	collection = collections.read(collection_id)
+	public_toggle_label = "Make private" if collection.public else "Make public"
+	
 	return flask.render_template('collection.html',
-		collection=collections.read(collection_id),
-		links=links.for_collection(collection_id))
+		collection=collection,
+		links=links.for_collection(collection_id),
+		public_toggle_label=public_toggle_label)
 
 @login_required
 def all_collections():
