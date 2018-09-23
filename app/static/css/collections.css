@@ -1,9 +1,17 @@
 
 .collection-controls {
 	display: flex;
-	justify-content: space-between;
+	align-content: space-between;
+	flex-direction: column;
 }
 
 .collection-controls--control {
 	min-width: 30rem;
+}
+
+@media screen and (min-width: 65rem) {
+	.collection-controls {
+		justify-content: space-between;
+		flex-direction: row;
+	}
 }
