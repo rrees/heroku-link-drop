@@ -8,6 +8,8 @@
 <div class="container-fluid">
     <h1>{{collection.name}}</h1>
 
+    <p><a href="{{url_for('public_collection', collection_id=collection.public_id)}}">Public link</a></p>
+
     <div class="collection-controls">
         <form method="POST" action="{{url_for('new_link_form')}}" class="collection-controls--control">
             <input type="hidden" name="collection_id" value="{{collection.key}}">

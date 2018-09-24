@@ -9,10 +9,14 @@ from .connection import connect
 collections_table = Table('collections')    
 
 def map_to_collection(result):
+    if not result:
+        return None
+        
     return models.Collection(
         key = result[0],
         name = result[1],
-        public = result[2]
+        public = result[2],
+        public_id = result[3],
     )
 
 def all(order_column=None, sort_descending=False):
@@ -58,8 +62,21 @@ def create(name, description=None, public=False):
 
 def read(key):
     q = Query.from_(collections_table)\
-        .select('key', 'name', 'public')\
+        .select('key', 'name', 'public', 'public_id')\
         .where(collections_table.key == key)
+
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute(str(q))
+    result = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return map_to_collection(result)
+
+def read_public(identifer):
+    q = Query.from_(collections_table)\
+        .select('key', 'name', 'public', 'public_id')\
+        .where(collections_table.public_id == identifer)
 
     conn = connect()
     cursor = conn.cursor()
