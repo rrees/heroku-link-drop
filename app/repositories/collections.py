@@ -11,13 +11,17 @@ collections_table = Table('collections')
 def map_to_collection(result):
     if not result:
         return None
-        
+
     return models.Collection(
         key = result[0],
         name = result[1],
         public = result[2],
         public_id = result[3],
     )
+
+def query_collection():
+    return Query.from_(collections_table)\
+        .select('key', 'name', 'public', 'public_id')
 
 def all(order_column=None, sort_descending=False):
 
@@ -27,9 +31,7 @@ def all(order_column=None, sort_descending=False):
     sort_order = Order.desc if sort_descending else Order.asc
 
     
-    q = Query.from_(collections_table)\
-        .select('key', 'name', 'public')\
-        .orderby(order_column, order=sort_order)
+    q = query_collection().orderby(order_column, order=sort_order)
 
     print(str(q))
 
