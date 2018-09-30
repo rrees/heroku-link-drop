@@ -63,8 +63,7 @@ def create(name, description=None, public=False):
     return collection_id
 
 def read(key):
-    q = Query.from_(collections_table)\
-        .select('key', 'name', 'public', 'public_id')\
+    q = query_collection()\
         .where(collections_table.key == key)
 
     conn = connect()
@@ -76,8 +75,7 @@ def read(key):
     return map_to_collection(result)
 
 def read_public(identifer):
-    q = Query.from_(collections_table)\
-        .select('key', 'name', 'public', 'public_id')\
+    q = query_collection()\
         .where(collections_table.public_id == identifer)
 
     conn = connect()
