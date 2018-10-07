@@ -37,9 +37,11 @@ def edit_link(link_id):
 
 @login_required
 def delete_link(link_id):
-    link_form = forms.DeleteLink(request.form)
+    link_form = forms.DeleteItem(request.form)
     assert link_form.validate(), "Link data in the form was incomplete"
     logging.info(link_form.data)
-    updated_link = links.update_link(link_id, **link_form.data)
 
-    return redirect(url_for('collection', collection_id=updated_link.collection_id))
+    link_id = link_form.item_id.data
+    link = links.read(link_id)
+
+    return redirect(url_for('collection', collection_id=link.collection_id))

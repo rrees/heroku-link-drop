@@ -16,7 +16,7 @@ def home_page():
 def collection(collection_id):
 	collection = collections.read(collection_id)
 	public_toggle_label = "Make private" if collection.public else "Make public"
-	
+
 	return flask.render_template('collection.html',
 		collection=collection,
 		links=links.for_collection(collection_id),
@@ -33,4 +33,15 @@ def link(collection_id, link_id):
 	return flask.render_template('link.html',
 		collection=collections.read(collection_id),
 		link=links.read(link_id),
+	)
+
+@login_required
+def delete_link(link_id):
+	link = links.read(link_id)
+
+	return flask.render_template('delete.html',
+		item='link',
+		identity=link.name or link.url,
+		item_id=link_id,
+		delete_action_url=flask.url_for('delete_link_form', link_id=link_id)
 	)

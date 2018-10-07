@@ -45,6 +45,7 @@ routes = [
     ('/public/collection/<collection_id>', 'public_collection', handlers.public.collection, ['GET']),
     ('/collections', 'collections', handlers.pages.all_collections, ['GET']),
     ('/collection/<collection_id>/link/<link_id>', 'link', handlers.pages.link, ['GET']),
+    ('/link/<link_id>/delete', 'delete_link', handlers.pages.delete_link, ['GET']),
 ]
 
 all_routes = itertools.chain(

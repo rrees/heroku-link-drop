@@ -17,5 +17,5 @@ class EditLink(Form):
     name = fields.StringField('Name')
     description = fields.StringField('Description')
 
-class DeleteLink(Form):
-    link_id = fields.HiddenField('Link ID', [validators.required()])
+class DeleteItem(Form):
+    item_id = fields.HiddenField('Item Id', [validators.required()])
