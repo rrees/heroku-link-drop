@@ -45,3 +45,31 @@ def delete_link(link_id):
     link = links.read(link_id)
 
     return redirect(url_for('collection', collection_id=link.collection_id))
+
+@login_required
+def make_public(collection_id):
+    collection_form = forms.CollectionChange(request.form)
+    assert collection_form.validate(), "Link data in the form was incomplete"
+
+    collections.public(True)
+
+    return redirect(url_for('collection', collection_id=collection_id))
+
+
+@login_required
+def make_private(collection_id):
+    collection_form = forms.CollectionChange(request.form)
+    assert collection_form.validate(), "Link data in the form was incomplete"
+
+    collections.public(False)
+
+    return redirect(url_for('collection', collection_id=collection_id))
+
+@login_required
+def edit(collection_id):
+    collection_form = forms.CollectionEdit(request.form)
+    assert collection_form.validate(), "Collection data was incomplete for the edit"
+
+    collections.update(**collection_form.data)
+
+    return redirect(url_for('collection', collection_id=collection_id))

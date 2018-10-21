@@ -15,12 +15,17 @@ def home_page():
 @login_required
 def collection(collection_id):
 	collection = collections.read(collection_id)
+
 	public_toggle_label = "Make private" if collection.public else "Make public"
+	toggle_action = (flask.url_for('collection_public_form', collection_id=collection_id)
+		if not collection.public else flask.url_for('collection_private_form', collection_id=collection_id))
 
 	return flask.render_template('collection.html',
 		collection=collection,
 		links=links.for_collection(collection_id),
-		public_toggle_label=public_toggle_label)
+		public_toggle_label=public_toggle_label,
+		visibility_action=toggle_action,
+	)
 
 @login_required
 def all_collections():
@@ -44,4 +49,13 @@ def delete_link(link_id):
 		identity=link.name or link.url,
 		item_id=link_id,
 		delete_action_url=flask.url_for('delete_link_form', link_id=link_id)
+	)
+
+@login_required
+def edit_collection(collection_id):
+	collection = collections.read(collection_id)
+
+	return flask.render_template('collection/edit.html',
+		collection=collection,
+		links=links.for_collection(collection_id),
 	)

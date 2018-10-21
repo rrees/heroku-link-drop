@@ -19,3 +19,10 @@ class EditLink(Form):
 
 class DeleteItem(Form):
     item_id = fields.HiddenField('Item Id', [validators.required()])
+
+class CollectionChange(Form):
+	collection_id = fields.HiddenField('Collection ID', [validators.required()])
+
+class CollectionEdit(Form):
+	name = fields.StringField('Name', [validators.required()])
+	description = fields.StringField('Description')

@@ -85,3 +85,28 @@ def read_public(identifer):
     cursor.close()
     conn.close()
     return map_to_collection(result)
+
+def public(public_flag):
+    q = Query.update(collections_table).set(collections_table.public, public_flag)
+
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute(str(q))
+    cursor.close()
+    conn.commit()
+    conn.close()
+    return public_flag
+
+def update(name, description=None):
+    q = Query.update(collections_table).set(collections_table.name, name)
+
+    if description:
+        q.set(collections_table.description, description)
+
+    print(q)
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute(str(q))
+    cursor.close()
+    conn.commit()
+    conn.close()

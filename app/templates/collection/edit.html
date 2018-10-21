@@ -1,0 +1,32 @@
+{% extends 'default.html' %}
+
+{% block title %}{{collection.name}}{% endblock %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <h1>{{collection.name}}</h1>
+
+    <form method="POST" action="/forms/collection/{{collection.key}}/edit">
+        {% include 'forms/edit-collection.html' %}
+    </form>
+
+    {% if links %}
+    <h2>Links</h2>
+    <ul class="links-list">
+        {% for link in links %}
+        <li class="links-list--link-entry">
+            <p><a href="{{link.url}}" target="{{link.url}}" rel="noopener">{% if link.name %}{{link.name}}{% else %}{{link.url}}{% endif %}</a></p>
+            {% if link.description %}
+            <div>{{link.description}}</div>
+            {% endif %}
+            <div><small><a href="{{url_for('link', collection_id=collection.key, link_id=link.id)}}">Edit</a></small></div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>This collection currently has no links</p>
+    {% endif %}
+</div>
+{% endblock %}
