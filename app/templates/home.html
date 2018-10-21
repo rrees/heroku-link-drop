@@ -13,11 +13,11 @@
 
 <div class="container-fluid">
     {% if collections %}
-    <table>
+    <ul class="recent-collection-list">
     {% for collection in collections %}
-        <tr>
-            <td><a href="/collection/{{collection.key}}">{{collection.name}}</a></td>
-        </tr>
+        <li>
+            <p><a href="/collection/{{collection.key}}">{{collection.name}}</a></p>
+        </li>
     {% endfor %}
     </table>
     {% endif %}

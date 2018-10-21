@@ -70,6 +70,6 @@ def edit(collection_id):
     collection_form = forms.CollectionEdit(request.form)
     assert collection_form.validate(), "Collection data was incomplete for the edit"
 
-    collections.update(**collection_form.data)
+    collections.update(collection_id, **collection_form.data)
 
     return redirect(url_for('collection', collection_id=collection_id))

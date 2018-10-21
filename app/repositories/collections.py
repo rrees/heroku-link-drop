@@ -97,13 +97,16 @@ def public(public_flag):
     conn.close()
     return public_flag
 
-def update(name, description=None):
+def update(key, name, description=None):
     q = Query.update(collections_table).set(collections_table.name, name)
 
     if description:
-        q.set(collections_table.description, description)
+        q = q.set(collections_table.description, description)
+
+    q = q.where(collections_table.key == key)
 
     print(q)
+
     conn = connect()
     cursor = conn.cursor()
     cursor.execute(str(q))

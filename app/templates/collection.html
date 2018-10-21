@@ -19,12 +19,15 @@
             </div>
         </form>
 
-        <form method="POST" class="collection-controls--control" action="{{visibility_action}}">
-            <input type="hidden" name="collection_id" value="{{collection.key}}">
-            <div class="form-group">
-            <button type="submit" class="btn btn-primary">{{public_toggle_label}}</button>
-            </div>
-        </form>
+        <div class="collection-controls--controls">
+            <p><a href="{{url_for('collection_edit', collection_id=collection.key)}}">Edit</a></p>
+            <form method="POST" class="collection-controls--control" action="{{visibility_action}}">
+                <input type="hidden" name="collection_id" value="{{collection.key}}">
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary">{{public_toggle_label}}</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     {% if links %}
