@@ -1,10 +1,13 @@
 from collections import namedtuple
+import datetime
 import uuid
 
 import pg8000
 from pypika import Table, Query
 
 from .connection import connect
+
+from .collections import touch_collection
 
 links_table = Table('links')
 
@@ -43,6 +46,8 @@ def add_link(collection_id, url, name=None, description=None):
 
 	conn.commit()
 	conn.close()
+
+	touch_collection(collection_id)
 
 	return link_id
 
@@ -94,5 +99,9 @@ def update_link(link_id, url, name=None, description=None):
 	conn.commit()
 	conn.close()
 
-	return read(link_id)
+	link = read(link_id)
+
+	touch_collection(link.collection_id)
+
+	return link
 

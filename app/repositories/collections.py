@@ -1,3 +1,4 @@
+import datetime
 import uuid
 
 import pg8000
@@ -32,8 +33,6 @@ def all(order_column=None, sort_descending=False):
 
     
     q = query_collection().orderby(order_column, order=sort_order)
-
-    print(str(q))
 
     conn = connect()
     cursor = conn.cursor()
@@ -88,7 +87,6 @@ def read_public(identifer):
 
 def public(public_flag):
     q = Query.update(collections_table).set(collections_table.public, public_flag)
-
     conn = connect()
     cursor = conn.cursor()
     cursor.execute(str(q))
@@ -98,14 +96,22 @@ def public(public_flag):
     return public_flag
 
 def update(key, name, description=None):
-    q = Query.update(collections_table).set(collections_table.name, name)
+    q = Query.update(collections_table).set(collections_table.name, name).set(collections_table.updated_timestamp, datetime.datetime.now())
 
     if description:
         q = q.set(collections_table.description, description)
 
     q = q.where(collections_table.key == key)
 
-    print(q)
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute(str(q))
+    cursor.close()
+    conn.commit()
+    conn.close()
+
+def touch_collection(key):
+    q = Query.update(collections_table).set(collections_table.updated_timestamp, datetime.datetime.now()).where(collections_table.key == key)
 
     conn = connect()
     cursor = conn.cursor()
