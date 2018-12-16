@@ -24,7 +24,7 @@ def query_collection():
     return Query.from_(collections_table)\
         .select('key', 'name', 'public', 'public_id')
 
-def all(order_column=None, sort_descending=False):
+def all(order_column=None, sort_descending=False, filter_by_name=None):
 
     if not order_column:
         order_column = 'updated_timestamp'
@@ -33,6 +33,9 @@ def all(order_column=None, sort_descending=False):
 
     
     q = query_collection().orderby(order_column, order=sort_order)
+
+    if filter_by_name:
+        q = q.where(collections_table.name.ilike(f'%{filter_by_name}%'))
 
     conn = connect()
     cursor = conn.cursor()

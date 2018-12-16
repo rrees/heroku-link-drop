@@ -9,8 +9,12 @@ def front_page():
 
 @login_required
 def home_page():
+	name_filter = flask.request.args.get('collection_name_filter', None)
+
+	collections_list = collections.all(sort_descending=True) if not name_filter else collections.all(sort_descending=True, filter_by_name=name_filter)
 	return flask.render_template('home.html',
-		collections=collections.all(sort_descending=True),)
+		collections=collections_list,
+		collection_name_filter=name_filter,)
 
 @login_required
 def collection(collection_id):
