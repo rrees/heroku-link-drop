@@ -6,15 +6,18 @@
 <div class="container-fluid mb3">
     <h1>Your links</h1>
 
-    <div class="flex justify-around">
-        <form method="POST" action="/forms/collections/new" class="form-inline">
+    <div class="home-page-actions">
+        <form method="POST" action="/forms/collections/new" class="form">
             {% include 'forms/new-collection.html' %}
         </form>
 
-        <form class="form-inline">
+        <form class="form">
             <div class="form-group">
                 <label for="collection-name-filter">Filter</label>
-                <input id="collection-name-filter" type="text" name="collection_name_filter"
+                <input id="collection-name-filter"
+                    type="text"
+                    name="collection_name_filter"
+                    class="form-control"
                     {% if collection_name_filter %}value="{{collection_name_filter}}"{% endif %}>
             </div>
 
