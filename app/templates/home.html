@@ -10,20 +10,6 @@
         <form method="POST" action="/forms/collections/new" class="form-inline">
             {% include 'forms/new-collection.html' %}
         </form>
-
-        <form class="form">
-            <div class="form-group">
-                <label for="collection-name-filter">Filter</label>
-                <input id="collection-name-filter"
-                    type="text"
-                    name="collection_name_filter"
-                    class="form-control"
-                    {% if collection_name_filter %}value="{{collection_name_filter}}"{% endif %}>
-            </div>
-
-            <button class="btn btn-primary">Filter</button>
-
-        </form>
     </div>
 
 </div>

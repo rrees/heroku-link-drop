@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+gunicorn = "*"
+redis = "*"
+pg8000 = "*"
+dsnparse = "*"
+Flask = "*"
+Flask-SSLify = "*"
+WTForms = "*"
+PyPika = "*"
+
+[requires]
+python_version = "3.6"
