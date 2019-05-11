@@ -5,7 +5,7 @@
       Menu
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-2">
+      <ul class="navbar-nav mr-3">
         <li class="nav-item active">
           <a class="nav-link" href="/collections">Collections</a>
         </li>
@@ -15,7 +15,7 @@
         <input id="collection-name-filter"
           type="search"
           name="collection_name_filter"
-          class="form-control mr-2"
+          class="form-control form-control-sm mr-2"
           {% if collection_name_filter %}value="{{collection_name_filter}}"{% endif %}>
           <button class="btn btn-sm btn-outline-success" type="submit">Search</button>
       </form>
