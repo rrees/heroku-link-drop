@@ -105,3 +105,14 @@ def update_link(link_id, url, name=None, description=None):
 
 	return link
 
+def delete(link_id):
+	q = Query.from_(links_table).where(links_table.id == link_id).delete()
+
+	conn = connect()
+	cursor = conn.cursor()
+	cursor.execute(str(q))
+	cursor.close()
+	conn.commit()
+	conn.close()
+
+	return None

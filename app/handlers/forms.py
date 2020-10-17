@@ -42,7 +42,10 @@ def delete_link(link_id):
     logging.info(link_form.data)
 
     link_id = link_form.item_id.data
+
     link = links.read(link_id)
+
+    links.delete(link_id)
 
     return redirect(url_for('collection', collection_id=link.collection_id))
 
