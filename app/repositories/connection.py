@@ -1,16 +1,8 @@
 import os
 
-import dsnparse
-import pg8000
+import psycopg2
 
-
-DATABASE_URI = os.environ['DATABASE_URL']
-
-r = dsnparse.parse(DATABASE_URI)
+DATABASE_URL = os.environ['DATABASE_URL']
 
 def connect():
-    return pg8000.connect(r.username,
-        host=r.host,
-        password=r.password,
-        database=r.paths[0],
-        ssl=True)
+	return psycopg2.connect(DATABASE_URL, sslmode='require')

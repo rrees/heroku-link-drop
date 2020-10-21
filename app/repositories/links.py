@@ -2,7 +2,6 @@ from collections import namedtuple
 import datetime
 import uuid
 
-import pg8000
 from pypika import Table, Query
 
 from .connection import connect

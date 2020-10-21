@@ -1,4 +1,4 @@
-[[source]]
+	[[source]]
 name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
@@ -8,12 +8,12 @@ verify_ssl = true
 [packages]
 gunicorn = "*"
 redis = "*"
-pg8000 = "*"
 dsnparse = "*"
 Flask = "*"
 Flask-SSLify = "*"
 WTForms = "*"
 PyPika = "*"
+psycopg2-binary = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.9"

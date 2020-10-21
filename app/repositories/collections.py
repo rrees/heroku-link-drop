@@ -1,13 +1,12 @@
 import datetime
 import uuid
 
-import pg8000
 from pypika import Table, Query, Order
 
 from . import models
 from .connection import connect
 
-collections_table = Table('collections')    
+collections_table = Table('collections')
 
 def map_to_collection(result):
     if not result:
@@ -19,6 +18,14 @@ def map_to_collection(result):
         public = result[2],
         public_id = result[3],
     )
+
+def execute_and_commit(query):
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute(str(query))
+    cursor.close()
+    conn.commit()
+    conn.close()
 
 def query_collection():
     return Query.from_(collections_table)\
@@ -122,3 +129,8 @@ def touch_collection(key):
     cursor.close()
     conn.commit()
     conn.close()
+
+def delete(key):
+    q = Query.from_(collections_table).where(collections_table.key == key).delete()
+
+    execute_and_commit(q)

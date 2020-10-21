@@ -76,3 +76,7 @@ def edit(collection_id):
     collections.update(collection_id, **collection_form.data)
 
     return redirect(url_for('collection', collection_id=collection_id))
+
+@login_required
+def delete_collection(collection_id):
+    pass
