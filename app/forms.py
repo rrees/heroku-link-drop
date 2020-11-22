@@ -26,3 +26,6 @@ class CollectionChange(Form):
 class CollectionEdit(Form):
 	name = fields.StringField('Name', [validators.required()])
 	description = fields.StringField('Description')
+
+class CollectionDelete(Form):
+    collection_id = fields.HiddenField('Collection ID', [validators.required(), validators.NumberRange(min=0)])

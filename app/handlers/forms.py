@@ -1,4 +1,4 @@
-from flask import redirect, request, url_for
+from flask import abort, redirect, request, url_for
 
 from app import forms
 from app.repositories import collections, links
@@ -79,4 +79,9 @@ def edit(collection_id):
 
 @login_required
 def delete_collection(collection_id):
-    pass
+    collection_form = forms.CollectionDelete(request.form)
+
+    if collections.validate():
+        return redirect(url_for('collections'))
+    
+    abort(400, "Form information was invalid")
