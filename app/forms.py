@@ -1,4 +1,4 @@
-from wtforms import Form, validators
+from wtforms import Form, validators, widgets
 from wtforms import fields
 
 class NewCollection(Form):
@@ -28,4 +28,6 @@ class CollectionEdit(Form):
 	description = fields.StringField('Description')
 
 class CollectionDelete(Form):
-    collection_id = fields.HiddenField('Collection ID', [validators.required(), validators.NumberRange(min=0)])
+    item_id = fields.IntegerField('Collection ID',
+        widget=widgets.HiddenInput(),
+        validators=[validators.required(), validators.NumberRange(min=0)])

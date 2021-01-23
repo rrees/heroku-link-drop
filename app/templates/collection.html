@@ -21,6 +21,9 @@
 
         <div class="collection-controls--controls">
             <p><a href="{{url_for('collection_edit', collection_id=collection.key)}}">Edit</a></p>
+            {% if not links %}
+            <p><a href="{{url_for('collection_delete', collection_id=collection.key)}}">Delete</a></p>
+            {% endif %}
             <form method="POST" class="collection-controls--control" action="{{visibility_action}}">
                 <input type="hidden" name="collection_id" value="{{collection.key}}">
                 <div class="form-group">

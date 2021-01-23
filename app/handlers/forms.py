@@ -79,9 +79,10 @@ def edit(collection_id):
 
 @login_required
 def delete_collection(collection_id):
-    collection_form = forms.CollectionDelete(request.form)
+    deletion_form = forms.CollectionDelete(request.form)
 
-    if collections.validate():
+    if deletion_form.validate():
+        collections.delete(int(deletion_form.item_id.data))
         return redirect(url_for('collections'))
     
     abort(400, "Form information was invalid")

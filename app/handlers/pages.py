@@ -63,3 +63,15 @@ def edit_collection(collection_id):
 		collection=collection,
 		links=links.for_collection(collection_id),
 	)
+
+
+@login_required
+def delete_collection(collection_id):
+	collection = collections.read(collection_id)
+
+	return flask.render_template('delete.html',
+		item='collection',
+		identity=collection.name,
+		item_id=collection.key,
+		delete_action_url=flask.url_for('collection_deletion_form', collection_id=collection.key),
+	)
