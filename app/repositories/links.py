@@ -58,23 +58,20 @@ def for_collection(collection_id, default_orderby=None):
 		.where(links_table.collection_id == collection_id)\
 		.orderby(order_by)
 
-	conn = connect()
-	cursor = conn.cursor()
-	cursor.execute(str(q))
-	results = [map_to_link(r) for r in cursor.fetchall()]
-	cursor.close()
-	conn.close()
+	with connect() as conn:
+		with conn.cursor() as cursor:
+			cursor.execute(str(q))
+			results = [map_to_link(r) for r in cursor.fetchall()]
+
 	return results
 
 def read(link_id):
 	q = read_link_columns().where(links_table.id == link_id)
 
-	conn = connect()
-	cursor = conn.cursor()
-	cursor.execute(str(q))
-	link_data = cursor.fetchone()
-	cursor.close()
-	conn.close()
+	with connect() as conn:
+		with conn.cursor() as cursor:
+			cursor.execute(str(q))
+			link_data = cursor.fetchone()
 
 	if link_data:
 		return map_to_link(link_data)

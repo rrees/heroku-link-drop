@@ -75,12 +75,11 @@ def read(key):
     q = query_collection()\
         .where(collections_table.key == key)
 
-    conn = connect()
-    cursor = conn.cursor()
-    cursor.execute(str(q))
-    result = cursor.fetchone()
-    cursor.close()
-    conn.close()
+    with connect() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(str(q))
+            result = cursor.fetchone()
+
     return map_to_collection(result)
 
 def read_public(identifer):
