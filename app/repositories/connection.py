@@ -1,8 +1,8 @@
 import os
 
-import psycopg2
+import psycopg
 
 DATABASE_URL = os.environ['DATABASE_URL']
 
 def connect():
-	return psycopg2.connect(DATABASE_URL, sslmode='require')
+	return psycopg.connect(DATABASE_URL, sslmode='require')

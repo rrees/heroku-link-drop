@@ -19,13 +19,13 @@ def map_to_collection(result):
         public_id = result[3],
     )
 
-def execute_and_commit(query):
-    conn = connect()
-    cursor = conn.cursor()
-    cursor.execute(str(query))
-    cursor.close()
-    conn.commit()
-    conn.close()
+def execute_and_commit(statement):
+    with connect() as conn:
+        cursor = conn.cursor()
+        cursor.execute(str(statement))
+        cursor.close()
+        conn.commit()
+
 
 def query_collection():
     return Query.from_(collections_table)\
@@ -44,12 +44,12 @@ def all(order_column=None, sort_descending=False, filter_by_name=None):
     if filter_by_name:
         q = q.where(collections_table.name.ilike(f'%{filter_by_name}%'))
 
-    conn = connect()
-    cursor = conn.cursor()
-    cursor.execute(str(q))
-    results = [map_to_collection(r) for r in cursor.fetchall()]
-    cursor.close()
-    conn.close()
+    with connect() as conn:
+        cursor = conn.cursor()
+        cursor.execute(str(q))
+        results = [map_to_collection(r) for r in cursor.fetchall()]
+        cursor.close()
+    
     return results
 
 def create(name, description=None, public=False):
@@ -113,22 +113,13 @@ def update(key, name, description=None):
 
     q = q.where(collections_table.key == key)
 
-    conn = connect()
-    cursor = conn.cursor()
-    cursor.execute(str(q))
-    cursor.close()
-    conn.commit()
-    conn.close()
+    execute_and_commit(q)
 
 def touch_collection(key):
     q = Query.update(collections_table).set(collections_table.updated_timestamp, datetime.datetime.now()).where(collections_table.key == key)
 
-    conn = connect()
-    cursor = conn.cursor()
-    cursor.execute(str(q))
-    cursor.close()
-    conn.commit()
-    conn.close()
+    execute_and_commit(q)
+
 
 def delete(key):
     q = Query.from_(collections_table).where(collections_table.key == key).delete()

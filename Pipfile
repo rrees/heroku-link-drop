@@ -14,8 +14,7 @@ Flask = "*"
 Flask-SSLify = "*"
 WTForms = "*"
 PyPika = "*"
-psycopg2-binary = "*"
-dataset = "*"
+psycopg = {extras = ["binary"], version = "*"}
 
 [requires]
 python_version = "3.11"
